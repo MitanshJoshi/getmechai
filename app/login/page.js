@@ -1,7 +1,14 @@
 "use client"
+import { signIn, useSession } from 'next-auth/react'
 import React from 'react'
+import { useRouter } from 'next/navigation'
 
 const Login = () => {
+  const { data: session } = useSession();
+   if (session) {
+   const router = useRouter();
+    router.push("/dashboard");
+  }
   return (
     <div className='text-white py-14 cotainer mx-auto'>
       <h1 className='text-3xl text-center font-bold'>Login so that your fans can support you</h1>
@@ -150,7 +157,7 @@ const Login = () => {
           <span>Continue with Facebook</span>
         </button>
 
-        <button className="flex items-center w-64 bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+        <button onClick={()=>{signIn("github")}} className="flex items-center w-64 bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
           <svg
             className="h-6 w-6 mr-2"
             xmlns="http://www.w3.org/2000/svg"
